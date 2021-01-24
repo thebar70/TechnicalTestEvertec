@@ -28,4 +28,10 @@ class Order extends Model
     const STATUS_REJECTED = 'rejected';
 
     protected $table = 'orders';
+
+    
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

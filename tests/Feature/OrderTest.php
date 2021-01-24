@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-
+use App\Models\Order;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\Product;
@@ -47,9 +47,9 @@ class OrderTest extends TestCase
             'curtomer_name' => 'Yeison Mosquera',
             'customer_email' => '404.mosquera@gmail.com',
         ]);
-        
+
         $response->assertSessionHasErrors([
-            'product_id' ,
+            'product_id',
             'customer_mobile',
         ]);
     }
@@ -64,11 +64,28 @@ class OrderTest extends TestCase
         $response = $this->post(route('order.store'), [
             'customer_email' => '404.mosquera@gmail.com',
             'product_id' => $product->id,
-        ]); 
+        ]);
 
         $response->assertSessionDoesntHaveErrors([
             'customer_email',
             'product_id',
         ]);
+    }
+
+    /**
+     * @test
+     */
+    public function can_show_a_order()
+    {
+        $this->withoutExceptionHandling();
+
+        $product = Order::factory()->create();
+
+        $response = $this->get(route('order.show', [$product->id]));
+
+        $response->assertStatus(200);
+
+        $response->assertViewIs('order.show');
+        $response->assertViewHas('order', $product);
     }
 }
