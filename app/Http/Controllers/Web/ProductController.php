@@ -11,7 +11,7 @@ use App\Models\Product;
 class ProductController extends Controller
 {
     protected $product_maganer;
-    
+
     public function __construct(IProduct $product_maganer)
     {
         $this->product_maganer = $product_maganer;
@@ -20,7 +20,7 @@ class ProductController extends Controller
     /**
      *  finds a product and returns it with a view
      *
-     *  @param App/Model/Product
+     *  @param App\Model\Product
      *  @throw ModelNotFoundException
      */
     public function showProduct(Product $product)
