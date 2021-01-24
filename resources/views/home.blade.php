@@ -89,7 +89,7 @@
         <!-- End Sidebar -->
 
         <div class="main-panel">
-            <div class="content">
+            <div class="content" style ="background-color: #b8b6bd79;" >
                 <div class="panel-header bg-primary-gradient">
                     <div class="page-inner py-5">
                         <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">

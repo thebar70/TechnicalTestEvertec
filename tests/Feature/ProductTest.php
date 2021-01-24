@@ -2,9 +2,11 @@
 
 namespace Tests\Feature;
 
-use App\Models\Product;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Services\Web\ProductImpl;
+use App\Models\Product;
+
 use Tests\TestCase;
 
 class ProductTest extends TestCase
@@ -21,9 +23,9 @@ class ProductTest extends TestCase
         $this->withoutExceptionHandling();
 
         $product = Product::factory()->create();
-        
+
         $response = $this->get('product/show/' . $product->id);
-        
+
         $response->assertStatus(200);
 
         $response->assertViewIs('product.show');
@@ -31,25 +33,22 @@ class ProductTest extends TestCase
     }
 
     /**
-    *@test 
-    */
-    public function show_the_list_of_products_in_the_store(){
+     *@test 
+     */
+    public function show_the_list_of_products_in_the_store()
+    {
         $this->withoutExceptionHandling();
-        
+
         Product::factory(10)->create();
-        
+
         $response = $this->get('product/list');
 
         $response->assertStatus(200);
 
         $product_manager = new ProductImpl();
         $products = $product_manager->listProducts();
-        
+
         $response->assertViewIs('product.list');
-        $response->assertViewHasAll($products);
-        $response->assertViewHasAll([
-            'name',
-            'price',
-        ]);
+        $response->assertViewHas('products', $products);
     }
 }
