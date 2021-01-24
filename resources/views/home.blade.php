@@ -79,8 +79,38 @@
                             </span>
                             <h4 class="text-section">Menú</h4>
                         </li>
-                        
-                       
+                        <li class="nav-item">
+                            <a data-toggle="collapse" href="#base">
+                                <i class="fas fa-layer-group"></i>
+                                <p>Productos</p>
+                                <span class="caret"></span>
+                            </a>
+                            <div class="collapse" id="base">
+                                <ul class="nav nav-collapse">
+                                    <li>
+                                        <a href="{{ route('product.list') }}">
+                                            <span class="sub-item">Ver Catalogo</span>
+                                        </a>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a data-toggle="collapse" href="#sidebarLayouts">
+                                <i class="fas fa-th-list"></i>
+                                <p>Ordenes</p>
+                                <span class="caret"></span>
+                            </a>
+                            <div class="collapse" id="sidebarLayouts">
+                                <ul class="nav nav-collapse">
+                                    <li>
+                                        <a href="{{ route('product.list') }}">
+                                            <span class="sub-item">Listar Ordenes</span>
+                                        </a>
+                                    </li>
+                            </div>
+                        </li>
 
                     </ul>
                 </div>

@@ -78,8 +78,12 @@ class OrderTest extends TestCase
     public function can_show_a_order()
     {
         $this->withoutExceptionHandling();
+        $product = Product::factory()->create();
 
-        $product = Order::factory()->create();
+        $product = Order::factory()->create([
+            'product_id' => $product->id,
+            'total_amount' => $product->price
+        ]);
 
         $response = $this->get(route('order.show', [$product->id]));
 
