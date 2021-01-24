@@ -2,9 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Models\Product;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ProductTest extends TestCase
@@ -18,11 +18,15 @@ class ProductTest extends TestCase
      */
     public function allow_show_product_with_view()
     {
-        $product = Product::factory(1)->create();
-        $response = $this->get('product/show/' . $product->id);
-        $response->statusOk();
+        $this->withoutExceptionHandling();
 
-        $response->assertViewIs('products.show');
+        $product = Product::factory()->create();
+        
+        $response = $this->get('product/show/' . $product->id);
+        
+        $response->assertStatus(200);
+
+        $response->assertViewIs('product.show');
         $response->assertViewHas('product', $product);
     }
 }
