@@ -29,4 +29,27 @@ class ProductTest extends TestCase
         $response->assertViewIs('product.show');
         $response->assertViewHas('product', $product);
     }
+
+    /**
+    *@test 
+    */
+    public function show_the_list_of_products_in_the_store(){
+        $this->withoutExceptionHandling();
+        
+        Product::factory(10)->create();
+        
+        $response = $this->get('product/list');
+
+        $response->assertStatus(200);
+
+        $product_manager = new ProductImpl();
+        $products = $product_manager->listProducts();
+        
+        $response->assertViewIs('product.list');
+        $response->assertViewHasAll($products);
+        $response->assertViewHasAll([
+            'name',
+            'price',
+        ]);
+    }
 }
