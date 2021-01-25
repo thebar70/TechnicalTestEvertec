@@ -37,21 +37,6 @@ class OrderTest extends TestCase
         $response->assertRedirect();
     }
 
-    /**
-     * @test
-     */
-    public function can_throw_errors_when_parameters_are_missing()
-    {
-
-        $response = $this->post(route('order.store'), [
-            'customer_name' => 'Yeison Mosquera',
-            'customer_email' => '404.mosquera@gmail.com',
-        ]);
-        $response->assertSessionHasErrors([
-            'product_id',
-            'customer_mobile',
-        ]);
-    }
 
     /**
      * @test
