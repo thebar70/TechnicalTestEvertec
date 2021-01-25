@@ -468,13 +468,30 @@
 											"height": 13,
 											"text": "+order_code",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAF3NYiyh5xbEvE=",
+											"_parent": {
+												"$ref": "AAAAAAF3L72rdVseFa0="
+											},
+											"model": {
+												"$ref": "AAAAAAF3NYiyS5xYaeU="
+											},
+											"font": "Arial;13;0",
+											"left": 653,
+											"top": 536,
+											"width": 106.5771484375,
+											"height": 13,
+											"text": "+total_amount",
+											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 648,
 									"top": 441,
 									"width": 116.5771484375,
-									"height": 98
+									"height": 113
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -487,7 +504,7 @@
 									},
 									"font": "Arial;13;0",
 									"left": 648,
-									"top": 539,
+									"top": 554,
 									"width": 116.5771484375,
 									"height": 10
 								},
@@ -529,7 +546,7 @@
 							"left": 648,
 							"top": 416,
 							"width": 116.5771484375,
-							"height": 133,
+							"height": 148,
 							"nameCompartment": {
 								"$ref": "AAAAAAF3L72rdVsZBPk="
 							},
@@ -1153,8 +1170,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 862,
-									"top": 460,
+									"left": 861,
+									"top": 463,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -1174,8 +1191,8 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 862,
-									"top": 445,
+									"left": 861,
+									"top": 448,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -1196,7 +1213,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 862,
-									"top": 490,
+									"top": 492,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -1216,7 +1233,7 @@
 									},
 									"font": "Arial;13;0",
 									"left": 776,
-									"top": 460,
+									"top": 465,
 									"width": 29.275390625,
 									"height": 13,
 									"alpha": 0.5235987755982988,
@@ -1238,8 +1255,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 793,
-									"top": 447,
+									"left": 792,
+									"top": 451,
 									"height": 13,
 									"alpha": 0.7853981633974483,
 									"distance": 40,
@@ -1260,7 +1277,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 786,
-									"top": 488,
+									"top": 492,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 25,
@@ -1280,7 +1297,7 @@
 									},
 									"font": "Arial;13;0",
 									"left": 918,
-									"top": 460,
+									"top": 461,
 									"width": 29.275390625,
 									"height": 13,
 									"alpha": -0.5235987755982988,
@@ -1301,8 +1318,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 930,
-									"top": 446,
+									"left": 929,
+									"top": 448,
 									"height": 13,
 									"alpha": -0.7853981633974483,
 									"distance": 40,
@@ -1322,7 +1339,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 937,
-									"top": 487,
+									"top": 489,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 25,
@@ -1369,7 +1386,7 @@
 								"$ref": "AAAAAAF3L72rdVsY0bQ="
 							},
 							"lineStyle": 1,
-							"points": "765:482;959:481",
+							"points": "765:487;959:482",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAF3L+G2yFzpslk="
@@ -1622,6 +1639,14 @@
 								"$ref": "AAAAAAF3L72rdFsWLfE="
 							},
 							"name": "order_code"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAF3NYiyS5xYaeU=",
+							"_parent": {
+								"$ref": "AAAAAAF3L72rdFsWLfE="
+							},
+							"name": "total_amount"
 						}
 					]
 				},

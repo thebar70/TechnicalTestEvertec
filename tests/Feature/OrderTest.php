@@ -44,10 +44,9 @@ class OrderTest extends TestCase
     {
 
         $response = $this->post(route('order.store'), [
-            'curtomer_name' => 'Yeison Mosquera',
+            'customer_name' => 'Yeison Mosquera',
             'customer_email' => '404.mosquera@gmail.com',
         ]);
-
         $response->assertSessionHasErrors([
             'product_id',
             'customer_mobile',

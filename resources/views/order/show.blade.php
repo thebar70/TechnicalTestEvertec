@@ -13,7 +13,11 @@
                             <h4>Hora de compra: {{ date('h-m', strtotime($order->created_at)) }}</h4><br>
                             <h2>Total: ${{ $order->product->price }}</h2>
                             <br><br>
-                            <a href="#" class="btn btn-primary">Comprar</a>
+                            <form action="{{ url('/order/pay/' . $order->id) }}" method="POST">
+                                {{ csrf_field() }}
+                                <button type="submit" class="btn btn-primary">Siguiente</button>
+                            </form>
+
                     </div>
                 </div>
 

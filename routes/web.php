@@ -35,4 +35,7 @@ Route::group(['prefix' => 'product'], function () {
 Route::group(['prefix' => 'order'], function () {
     Route::post('store/', [OrderController::class, 'storeOrder'])->name('order.store');
     Route::get('show/{order}', [OrderController::class, 'showOrder'])->name('order.show');
+    Route::post('pay/{order}', [OrderController::class, 'pay'])->name('order.pay');
 });
+
+
