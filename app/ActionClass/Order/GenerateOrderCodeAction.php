@@ -1,6 +1,6 @@
 <?php
 
-namespace App\ActionClass;
+namespace App\ActionClass\Order;
 
 class GenerateOrderCodeAction
 {

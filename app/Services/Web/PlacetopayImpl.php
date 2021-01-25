@@ -2,34 +2,30 @@
 
 namespace App\Services\Web;
 
-use App\ActionClass\Placetopay\GenerateAuthPlacetopayAction;
-use App\ActionClass\Placetopay\GenerateBuyerInfoAction;
-use App\ActionClass\Placetopay\GeneratePaymentInfoAction;
-use App\Interfaces\IPlacetopay;
+use App\ActionClass\Placetopay\CreateDataRedirectionAction;
+use App\ActionClass\Placetopay\MakeCallPlacetopayAction;
+use App\Exceptions\RedirectPlacetopayException;
+use App\Interfaces\Web\IPlacetopay;
 use App\Models\Order;
 
 class PlacetopayImpl implements IPlacetopay
 {
     /**
-     * Returns the redirect data to placetopay
+     * Generate a redirect url to make a payment
      * @return array
      */
-    public function createDataRedirect(Order $order): array
+    public function generateRedirectUrl($request, Order $order): string
     {
-        $auth = GenerateAuthPlacetopayAction::execute();
-        $expiration = $auth['expiration'];
-        unset($auth['expiration']);
-        $data = [
-            'auth' => $auth,
-            'locale' => 'en_CO',
-            'buyer' => GenerateBuyerInfoAction::execute($order),
-            'payment' => GeneratePaymentInfoAction::execute($order),
-            'expiration' => $expiration,
-            'returnUrl' => 'http://localhost/TechnicalTestEvertec/public/api/placetopay/payment/callback/',
-            'ipAddress' => '127.0.0.1',
-            'userAgent' => 'PlacetoPay Sandbox'
-        ];
+        $data = CreateDataRedirectionAction::execute($request, $order);
+        $session_placetopay_url = config('placetopay.url.base');
+        if (!$session_placetopay_url) {
+            $reason = 'url placetopay not found';
+            $data = [];
+            throw new RedirectPlacetopayException($reason, $data);
+        }
 
-        return $data;
+        $field = 'processUrl';
+
+        return MakeCallPlacetopayAction::execute($field, $session_placetopay_url, $data);
     }
 }

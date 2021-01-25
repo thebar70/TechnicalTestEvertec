@@ -4,17 +4,17 @@ namespace Tests\Feature;
 
 use App\ActionClass\Placetopay\GenerateAuthPlacetopayAction;
 use App\ActionClass\Placetopay\GeneratePaymentInfoAction;
-use App\Models\Order;
-use App\Models\Product;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+use App\Models\Product;
+use App\Models\Order;
 use Tests\TestCase;
 
 class PlacetopayTest extends TestCase
 {
     use DatabaseMigrations;
     use RefreshDatabase;
+
     /**
      * @test 
      * @return void
@@ -133,6 +133,23 @@ class PlacetopayTest extends TestCase
         $this->assertNotNull($keys['amount']['currency']);
         $this->assertNotNull($keys['amount']['total']);
         $this->assertNotNull($keys['allowPartial']);
-        
     }
+
+    /**
+     * @test
+     */
+    public function can_generate_redirect_url()
+    {
+        $this->withoutExceptionHandling();
+        $product = Product::factory()->create();
+
+        $order = Order::factory()->create([
+            'product_id' => $product->id,
+            'total_amount' => $product->price
+        ]);
+
+        $response = $this->post('placetopay/redirect_user/' . $order->id);
+
+        $response->assertStatus(302);
+    } 
 }

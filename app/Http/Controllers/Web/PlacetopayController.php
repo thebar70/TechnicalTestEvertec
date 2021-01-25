@@ -3,20 +3,29 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Services\Web\PlacetopayImpl;
-use Carbon\Carbon;
+use App\Interfaces\Web\IPlacetopay;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
+use App\Models\Order;
 
 class PlacetopayController extends Controller
 {
-    public function paymentCallback(Request $request)
+    protected $placetopay_manager;
+
+    public function __construct(IPlacetopay $placetopay_manager)
     {
-        Log::debug(
-            'payment recived',
-            [
-                'data' => $request->all(),
-            ]
-        );
+        $this->placetopay_manager = $placetopay_manager;
+    }
+
+    /**
+     * Redirect user to payment site
+     * 
+     * @param Illuminate\Http\Request
+     * @param App\Models\Order
+     * */
+    public function redirecToPaymentSite(Request $request, Order $order)
+    {
+        $url = $this->placetopay_manager->generateRedirectUrl($request, $order);
+
+        return redirect($url);
     }
 }

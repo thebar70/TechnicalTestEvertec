@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Interfaces\IProduct;
+use App\Interfaces\Web\IProduct;
 use Illuminate\Http\Request;
 use App\Models\Product;
 

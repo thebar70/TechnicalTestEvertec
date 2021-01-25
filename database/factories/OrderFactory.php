@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\ActionClass\GenerateOrderCodeAction;
+use App\ActionClass\Order\GenerateOrderCodeAction;
 use App\Models\Order;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

@@ -2,10 +2,10 @@
 
 namespace App\Services\Web;
 
-use App\ActionClass\GenerateOrderCodeAction;
-use App\Interfaces\IOrder;
-use App\Models\Order;
+use App\ActionClass\Order\GenerateOrderCodeAction;
+use App\Interfaces\Web\IOrder;
 use App\Models\Product;
+use App\Models\Order;
 
 class OrderImpl implements IOrder
 {

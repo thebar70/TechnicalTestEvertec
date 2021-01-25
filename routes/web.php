@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Web\PlacetopayController;
 use App\Http\Controllers\Web\ProductController;
 use App\Http\Controllers\Web\OrderController;
 use Illuminate\Support\Facades\Route;
@@ -38,4 +39,12 @@ Route::group(['prefix' => 'order'], function () {
     Route::post('pay/{order}', [OrderController::class, 'pay'])->name('order.pay');
 });
 
-
+/**
+ *  Placetopay route
+ * 
+ *  @middleware none
+ *  @prefix order
+ */
+Route::group(['prefix' => 'placetopay'], function () {
+    Route::post('redirect_user/{order}', [PlacetopayController::class, 'redirecToPaymentSite'])->name('placetopay.redirect_user');
+});

@@ -3,7 +3,7 @@
 namespace App\Services\Web;
 
 use Illuminate\Support\Collection;
-use App\Interfaces\IProduct;
+use App\Interfaces\Web\IProduct;
 use App\Models\Product;
 
 

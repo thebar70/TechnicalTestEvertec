@@ -13,10 +13,10 @@ class GeneratePaymentInfoAction
             'reference' => $order->order_code,
             'description' => 'Description',
             'amount' => [
-                'currency' => 'USD',
+                'currency' => config('my_store.currency'),
                 'total' => $order->total_amount,
             ],
-            'allowPartial' => false,
+            'allowPartial' => config('my_store.allow_partial_payment'),
         ];
 
         return $payment;
