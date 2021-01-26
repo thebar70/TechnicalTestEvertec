@@ -27,6 +27,8 @@ class OrderFactory extends Factory
             'customer_name' => $this->faker->name,
             'customer_email' => $this->faker->email,
             'customer_mobile' => $this->faker->phoneNumber,
+            'customer_surname'=>$this->faker->lastName,
+            'customer_document'=>$this->faker->dni,
             'status' => Order::STATUS_CREATED,
         ];
     }

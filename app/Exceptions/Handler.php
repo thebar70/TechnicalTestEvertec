@@ -4,7 +4,6 @@ namespace App\Exceptions;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Support\Facades\Redirect;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
@@ -37,21 +36,17 @@ class Handler extends ExceptionHandler
     public function register()
     {
         $this->reportable(function (Throwable $e) {
+            dd($e);
         });
-    }
 
-    public function render($request, Throwable $e)
-    {
-        if ($e instanceof NotFoundHttpException) {
+        $this->renderable(function (ModelNotFoundException $e, $request) {
             return response()->view('not_found');
-        }
-
-        if ($e instanceof ModelNotFoundException) {
-            return response()->view('not_found');
-        }
-
-        if ($e instanceof RedirectPlacetopayException) {
+        });
+        $this->renderable(function (RedirectPlacetopayException $e, $request) {
             return redirect(url('home'));
-        }
+        });
+        $this->renderable(function (NotFoundHttpException $e, $request) {
+            return response()->view('not_found');
+        });
     }
 }

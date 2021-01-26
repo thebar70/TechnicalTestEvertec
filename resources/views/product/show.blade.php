@@ -43,7 +43,12 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Tu Nombre:</label>
                                 <input type="text" required='required' class="form-control border border-dark"
-                                    name="customer_name" id="customer_name" placeholder="Pedro Picapiedra...">
+                                    name="customer_name" id="customer_name" placeholder="Pedro...">
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Apellido:</label>
+                                <input type="text" required='required' class="form-control border border-dark"
+                                    name="customer_surname" id="customer_surname" placeholder="Picapiedra...">
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Email</label>
@@ -55,6 +60,17 @@
                                 <input type="text" required='required' class="form-control border border-dark"
                                     name="customer_mobile" id="customer_mobile" placeholder="312 555 555">
                             </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Tipo de Documento</label>
+                                <input type="text" required='required' class="form-control border border-dark"
+                                    name="customer_ducument_type" id="customer_document_type" placeholder="CC">
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Documento</label>
+                                <input type="text" required='required' class="form-control border border-dark"
+                                    name="customer_document" id="customer_document" placeholder="1234567">
+                            </div>
+
 
                         </div>
                         <div class="modal-footer">
@@ -67,3 +83,4 @@
         </div>
     @endif
 @endsection
+

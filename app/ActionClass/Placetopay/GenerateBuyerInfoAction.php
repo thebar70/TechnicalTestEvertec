@@ -11,11 +11,11 @@ class GenerateBuyerInfoAction
     {
         $buyer = [
             'name' => $order->customer_name,
-            'surname' => 'test',
+            'surname' => $order->surname,
             'email' => $order->customer_email,
-            'document' => 12345678,
-            'documentType' => 'CC',
-            'mobile' => 1234345345,
+            'document' => $order->customer_dni,
+            'documentType' => $order->customer_document_type,
+            'mobile' => $order->customer_mobile,
         ];
 
         return $buyer;

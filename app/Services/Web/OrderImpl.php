@@ -23,6 +23,9 @@ class OrderImpl implements IOrder
         $order->customer_name = $data['customer_name'];
         $order->customer_email = $data['customer_email'];
         $order->customer_mobile = $data['customer_mobile'];
+        $order->customer_document = $data['customer_document'];
+        $order->customer_surname = $data['customer_surname'];
+        $order->customer_document_type = $data['customer_document_type'];
         $order->status = Order::STATUS_CREATED;
         $order->total_amount = $product->price;
         $order->product_id = $product->id;
