@@ -12,7 +12,7 @@
                             <div class="card-body">
                                 <img class="card-img-top " src="{{ $product->image_path }}" alt="Card image cap">
                                 <div class="card-body">
-                                    <h2>${{ $product->price }}</h2>
+                                    <h2>${{ number_format($product->price) }}</h2>
                                     <br>
                                     <a href="show/{{ $product->id }}" class="btn btn-primary">Ver</a>
                                 </div>

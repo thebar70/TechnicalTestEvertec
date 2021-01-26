@@ -29,9 +29,14 @@ class Order extends Model
 
     protected $table = 'orders';
 
-    
+
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+
+    public function payment()
+    {
+        return $this->hasOne(Payment::class);
     }
 }

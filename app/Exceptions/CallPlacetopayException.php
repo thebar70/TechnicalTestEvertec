@@ -2,28 +2,11 @@
 
 namespace App\Exceptions;
 
-use Illuminate\Support\Facades\Log;
-use Exception;
-
-class CallPlacetopayException extends Exception
+class CallPlacetopayException extends MyStoreBaseException
 {
-    protected $reason;
-    protected $data;
-
     public function __construct($reason, $data)
     {
-        $this->reason = $reason;
-        $this->data = $data;
-        $this->action();
-    }
-    /**
-     * Specify in the log what has happened
-     */
-    public function action()
-    {
-        Log::debug('CallPlacetopayException', [
-            'reason' => $this->reason,
-            'data' => $this->data,
-        ]);
+        parent::__construct($reason, $data);
+        parent::action(get_class($this));
     }
 }

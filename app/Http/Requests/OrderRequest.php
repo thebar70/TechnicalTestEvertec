@@ -25,11 +25,8 @@ class OrderRequest extends FormRequest
     {
         return [
             'customer_name' => ['required', 'string', 'max:255'],
-            'customer_surname' => ['required', 'string', 'max:255'],
             'customer_email' => ['required', 'email'],
             'customer_mobile' => ['required', 'string', 'max:20'],
-            'customer_document' => ['required', 'string', 'max:20'],
-            'customer_document_type' => ['required', 'string', 'max:20'],
             'product_id' => ['required', 'integer', 'exists:products,id'],
         ];
     }

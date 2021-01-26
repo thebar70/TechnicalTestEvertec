@@ -16,7 +16,7 @@ class CallPlacetopayAction
         $status = $response->getStatusCode();
         $content = new stdClass();
         if ($status !== 200) {
-            $reason = 'failed to get response';
+            $reason = 'Failed to get response';
             $data = $content;
             throw new CallPlacetopayException($reason, $data);
         }

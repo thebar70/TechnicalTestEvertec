@@ -19,12 +19,8 @@ class CreateOrdersTable extends Migration
             $table->string('customer_name');
             $table->string('customer_email');
             $table->string('customer_mobile');
-            $table->string('customer_document');
-            $table->string('customer_surname');
-            $table->string('customer_document_type');
-            $table->string('requestId')->nullable();
             $table->float('total_amount');
-            $table->string('status')->default('created');
+            $table->string('status');
             $table->unsignedBigInteger('product_id');
             $table->timestamps();
 

@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
-});
+})->name('home');
 /**
  *  Product route
  * 
@@ -39,6 +39,7 @@ Route::group(['prefix' => 'product'], function () {
 Route::group(['prefix' => 'order'], function () {
     Route::post('store/', [OrderController::class, 'storeOrder'])->name('order.store');
     Route::get('show/{order}', [OrderController::class, 'showOrder'])->name('order.show');
+    Route::get('list/', [OrderController::class, 'listOrders'])->name('order.list');
     Route::post('pay/{order}', [OrderController::class, 'pay'])->name('order.pay');
 });
 

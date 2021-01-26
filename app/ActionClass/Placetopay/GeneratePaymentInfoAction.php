@@ -11,7 +11,7 @@ class GeneratePaymentInfoAction
     {
         $payment = [
             'reference' => $order->order_code,
-            'description' => 'Description',
+            'description' => config('my_store.payment_description'),
             'amount' => [
                 'currency' => config('my_store.currency'),
                 'total' => $order->total_amount,

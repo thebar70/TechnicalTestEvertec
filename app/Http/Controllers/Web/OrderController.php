@@ -23,7 +23,19 @@ class OrderController extends Controller
      */
     public function showOrder(Order $order)
     {
+        
         return view('order.show')->with(compact('order'));
+    }
+
+    /**
+     *  Finds a order and returns it with a view
+     * 
+     * @param App\Models\Order
+     */
+    public function listOrders()
+    {
+        $orders = $this->order_manager->listOrders();
+        return view('order.list')->with(compact('orders'));
     }
 
     /**

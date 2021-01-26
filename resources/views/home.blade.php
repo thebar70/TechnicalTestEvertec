@@ -105,7 +105,7 @@
                             <div class="collapse" id="sidebarLayouts">
                                 <ul class="nav nav-collapse">
                                     <li>
-                                        <a href="{{ route('product.list') }}">
+                                        <a href="{{ route('order.list') }}">
                                             <span class="sub-item">Listar Ordenes</span>
                                         </a>
                                     </li>

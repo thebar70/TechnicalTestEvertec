@@ -31,7 +31,7 @@ class CheckPaymentStatusCommand extends Command
      */
 
     protected $placetopay_manager;
-    
+
     public function __construct(PlacetopayImpl $placetopay_manager)
     {
         parent::__construct();
@@ -46,7 +46,9 @@ class CheckPaymentStatusCommand extends Command
     public function handle()
     {
 
-        Order::where('status', Order::STATUS_CREATED)->where('requestId', '!=', null)
+        Order::where('orders.status', Order::STATUS_CREATED)
+            ->join('payments', 'payments.order_id', 'orders.id')
+            ->where('payments.requestId', '!=', null)
             ->chunk(100, function ($orders) {
                 $orders->each(function ($order) {
                     $this->placetopay_manager->checkPaymentStatus($order);
