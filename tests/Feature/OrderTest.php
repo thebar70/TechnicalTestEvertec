@@ -25,9 +25,12 @@ class OrderTest extends TestCase
         $product = Product::factory()->create();
 
         $response = $this->post(route('order.store'), [
-            'customer_name' => 'Yeison Mosquera',
+            'customer_name' => 'Yeison',
             'customer_email' => '404.mosquera@gmail.com',
             'customer_mobile' => '+57 312555555',
+            'customer_surname' => 'Mosquera',
+            'customer_document' => '123344566',
+            'customer_document_type' => '123344566',
             'product_id' => $product->id,
         ]);
 

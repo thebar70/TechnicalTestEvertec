@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Web\PlacetopayController;
+use App\Http\Controllers\Api\PlacetopayController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +23,6 @@ use Illuminate\Support\Facades\Route;
  *  @prefix placetopay
  */
 Route::group(['prefix' => 'placetopay'], function () {
-    Route::post('payment/callback', [PlacetopayController::class, 'paymentCallback']);
+    Route::get('payment/callback/{order}', [PlacetopayController::class, 'paymentCallback']);
     
 });

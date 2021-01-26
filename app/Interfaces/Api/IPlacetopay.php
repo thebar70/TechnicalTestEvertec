@@ -2,9 +2,9 @@
 
 namespace App\Interfaces\Api;
 
-use Illuminate\Support\Collection;
+use App\Models\Order;
 
 interface IPlacetopay
 {
-    public function paymentCallback(): Collection;
+    public function checkPaymentStatus(Order $order);
 }

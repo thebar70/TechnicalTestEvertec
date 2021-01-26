@@ -36,7 +36,7 @@ class Handler extends ExceptionHandler
     public function register()
     {
         $this->reportable(function (Throwable $e) {
-            dd($e);
+            
         });
 
         $this->renderable(function (ModelNotFoundException $e, $request) {
@@ -48,5 +48,7 @@ class Handler extends ExceptionHandler
         $this->renderable(function (NotFoundHttpException $e, $request) {
             return response()->view('not_found');
         });
+
+        
     }
 }

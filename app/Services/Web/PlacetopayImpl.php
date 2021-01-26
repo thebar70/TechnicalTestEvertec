@@ -3,7 +3,7 @@
 namespace App\Services\Web;
 
 use App\ActionClass\Placetopay\CreateDataRedirectionAction;
-use App\ActionClass\Placetopay\MakeCallPlacetopayAction;
+use App\ActionClass\Placetopay\CallPlacetopayAction;
 use App\Exceptions\RedirectPlacetopayException;
 use App\Interfaces\Web\IPlacetopay;
 use App\Models\Order;
@@ -23,9 +23,11 @@ class PlacetopayImpl implements IPlacetopay
             $data = [];
             throw new RedirectPlacetopayException($reason, $data);
         }
+        $content = CallPlacetopayAction::execute($session_placetopay_url, $data);
 
-        $field = 'processUrl';
+        $order->requestId = $content->requestId;
+        $order->save();
 
-        return MakeCallPlacetopayAction::execute($field, $session_placetopay_url, $data);
+        return $content->processUrl;
     }
 }

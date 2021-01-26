@@ -19,6 +19,7 @@ return [
     'url' => [
         'base' => env('PLACETOPAY_URL_BASE', null),
         'callback' => env('PLACETOPAY_URL_CALLBACK', null),
+        'payment_status' => env('PLACETOPAY_URL_PAYMENT_STATUS', null),
     ],
     'session' => [
         'expiration_time' => env('PLACETOPAY_SESSION_EXPIRATION_TIME', 10),

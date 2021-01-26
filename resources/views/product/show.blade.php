@@ -63,7 +63,7 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Tipo de Documento</label>
                                 <input type="text" required='required' class="form-control border border-dark"
-                                    name="customer_ducument_type" id="customer_document_type" placeholder="CC">
+                                    name="customer_document_type" id="customer_document_type" placeholder="CC">
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Documento</label>
@@ -84,3 +84,14 @@
     @endif
 @endsection
 
+@section('script')
+    @if (count($errors) > 0)
+        <script>
+            alert('{{ $errors }}');
+            $(document).ready(function() {
+                $('#exampleModal').modal('show');
+            });
+
+        </script>
+    @endif
+@endsection

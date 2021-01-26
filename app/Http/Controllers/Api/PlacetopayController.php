@@ -3,20 +3,27 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Services\Web\PlacetopayImpl;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
+use App\Interfaces\Api\IPlacetopay;
+use App\Models\Order;
 
 class PlacetopayController extends Controller
 {
-    public function paymentCallback(Request $request)
+    protected $placetopay_manager;
+
+    public function __construct(IPlacetopay $placetopay_manager)
     {
-        Log::debug(
-            'payment recived',
-            [
-                'data' => $request->all(),
-            ]
-        );
+        $this->placetopay_manager = $placetopay_manager;
+    }
+
+    /**
+     * Receives user redirect from placetopay
+     * 
+     * @param App\Models\Order
+     */
+    public function paymentCallback(Order $order)
+    {
+        $this->placetopay_manager->checkPaymentStatus($order);
+
+        return redirect(route('order.show', [$order->id]));
     }
 }

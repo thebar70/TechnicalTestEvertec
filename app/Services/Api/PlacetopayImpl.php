@@ -1,34 +1,39 @@
 <?php
 
-namespace App\Services\Web;
+namespace App\Services\Api;
 
-use App\ActionClass\GenerateOrderCodeAction;
-use App\Interfaces\IOrder;
+use App\ActionClass\Placetopay\CallPlacetopayAction;
+use App\ActionClass\Placetopay\GenerateAuthPlacetopayAction;
+use App\Interfaces\Api\IPlacetopay;
 use App\Models\Order;
-use App\Models\Product;
 
-class PlacetopayImpl implements IOrder
+class PlacetopayImpl implements IPlacetopay
 {
     /**
      * Returns a list of products
      * @return Illuminate\Support\Collection
      */
-    public function storeOrder($data): Order
+    public function checkPaymentStatus(Order $order)
     {
-        $product = Product::find($data['product_id']);
-        $order_code = GenerateOrderCodeAction::execute();
+        $paymet_status_url = config('placetopay.url.payment_status');
 
-        $order = new Order();
-        $order->order_code = $order_code;
-        $order->customer_name = $data['customer_name'];
-        $order->customer_email = $data['customer_email'];
-        $order->customer_mobile = $data['customer_mobile'];
-        $order->status = Order::STATUS_CREATED;
-        $order->total_amount = $product->price;
-        $order->product_id = $product->id;
-
-        $order->save();
-
-        return $order;
+        if ($paymet_status_url) {
+            $auth = GenerateAuthPlacetopayAction::execute();
+            $data = ['auth' => $auth];
+            $url = $paymet_status_url . $order->requestId;
+            $content = CallPlacetopayAction::execute($url, $data);
+            switch ($content->status->status) {
+                case 'REJECTED':
+                    $order->status = Order::STATUS_REJECTED;
+                    break;
+                case 'APPROVED':
+                    $order->status = Order::STATUS_PAYED;
+                    break;
+                default:
+                    # code...
+                    break;
+            }
+            $order->save();
+        }
     }
 }
