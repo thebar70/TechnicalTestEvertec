@@ -26,14 +26,22 @@ En el archivo .env.example esta las variables de entorno que debe usar tanto par
 Agregue únicamente las credenciales 'PLACETOPAY_LOGIN' y 'PLACETOPAY_SECRET'
  
 Si ha configurado bien las variables de entorno, ahora proceda con lo siguiente:
-- ejecute dentro del directorio del proyecto php artisan key:generate
-- ejecute dentro del directorio del proyecto php artisan key:generate
-- ejecute php artisan migrate:fresh --seed
-- ejecute php artisan test
+- ejecute dentro del directorio del proyecto 'php artisan key:generate'
+- ejecute dentro del directorio del proyecto 'php artisan key:generate'
+- ejecute 'php artisan migrate:fresh --seed'
+- ejecute 'php artisan test'
  
 Si todo ha salido bien, la ejecución del test mostrará que todas las validaciones pasaron
  
 Finalmente puede ejecutar php artisan server
+
+Para realizar la verificación del estado de los pagos de forma automática, se hace uso de un command, el cual se ejecuta cada minuto
+Para lograr que este comando se ejecute de forma automática, y permita evidenciar la actualización de estado de las órdenes de compra,
+será necesario que cree una línea dentro de su manejador de cron, ejecute 'crontab -e' y agregue una linea como la siguiente
+'* * * * * cd /directorio_del_repositorio && php artisan schedule:run >> /dev/null 2>&1'
+
+Si no lo desea, en ese caso ejecute manualmente dentro del directorio del repositorio: 'php artisan check:payment_status' cada vez que desee
+que se actualicen los estados de los pagos
 
 Contacto: Email [404.mosquera@gmail.com]
           Linkedin [Yeison_Mosquera](https://www.linkedin.com/in/thebar70)
