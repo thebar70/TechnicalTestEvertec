@@ -7,10 +7,18 @@ use Exception;
 
 class MyStoreBaseException extends Exception
 {
-
+    /**
+     * Reason exception
+     * @var string
+     */
     protected $reason;
+
+    /**
+     * Data exception
+     * @var array
+     */
     protected $data;
-    
+
     public function __construct($reason, $data)
     {
         $this->reason = $reason;
@@ -19,6 +27,8 @@ class MyStoreBaseException extends Exception
 
     /**
      * Specify in the log what has happened
+     * 
+     * @param string $exception
      */
     public  function action($exception)
     {

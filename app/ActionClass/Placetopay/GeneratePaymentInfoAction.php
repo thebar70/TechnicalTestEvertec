@@ -6,7 +6,12 @@ use App\Models\Order;
 
 class GeneratePaymentInfoAction
 {
-
+    /**
+     * Generate payment data based on the order
+     * 
+     * @param App\Models\Order $order
+     * @return array
+     */
     public static function execute(Order $order): array
     {
         $payment = [

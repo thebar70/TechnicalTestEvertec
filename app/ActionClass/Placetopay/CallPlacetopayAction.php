@@ -3,13 +3,17 @@
 namespace App\ActionClass\Placetopay;
 
 use App\Exceptions\CallPlacetopayException;
-use App\Exceptions\RedirectPlacetopayException;
 use Illuminate\Support\Facades\Http;
 use stdClass;
 
 class CallPlacetopayAction
 {
-
+    /**
+     * Make a call to the api placetopay
+     * 
+     * @param $url
+     * @param $data
+     */
     public static function execute($url, $data)
     {
         $response = Http::post($url, $data);

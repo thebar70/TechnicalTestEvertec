@@ -39,4 +39,17 @@ class Order extends Model
     {
         return $this->hasOne(Payment::class);
     }
+
+    /**
+     * Returns status based on native language
+     * @return string
+     */
+    public function getCurrentStatus(): string
+    {
+        if ($this->payment && $this->payment->status == Payment::PAYMENT_STATUS_WAITING_RESPONSE) {
+            return config('my_store.order_status.waiting_response');
+        }
+
+        return config('my_store.order_status.' . $this->status);
+    }
 }

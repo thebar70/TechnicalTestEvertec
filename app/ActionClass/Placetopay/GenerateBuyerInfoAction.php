@@ -6,15 +6,17 @@ use App\Models\Order;
 
 class GenerateBuyerInfoAction
 {
-
+    /**
+     * Generates buyer data
+     * 
+     * @param App\Models\Order $order
+     * @return array
+     */
     public static function execute(Order $order): array
     {
         $buyer = [
             'name' => $order->customer_name,
-            //'surname' => $order->customer_surname,
             'email' => $order->customer_email,
-            //'document' => $order->customer_document,
-            //'documentType' => $order->customer_document_type,
             'mobile' => $order->customer_mobile,
         ];
 

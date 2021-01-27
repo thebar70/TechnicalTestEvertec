@@ -40,6 +40,12 @@ class Payment extends Model
     const PAYMENT_STATUS_FAILED = 'failed';
 
     /**
+     * Waiting payment status
+     * @var string
+     */
+    const PAYMENT_STATUS_WAITING_RESPONSE = 'waiting';
+
+    /**
      * Unknow payment status
      * @var string
      */

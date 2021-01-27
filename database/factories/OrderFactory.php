@@ -28,6 +28,7 @@ class OrderFactory extends Factory
             'customer_email' => $this->faker->email,
             'customer_mobile' => $this->faker->phoneNumber,
             'status' => Order::STATUS_CREATED,
+            'waiting_status_response' => false,
         ];
     }
 }

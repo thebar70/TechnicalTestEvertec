@@ -6,7 +6,13 @@ use App\Models\Order;
 
 class CreateDataRedirectionAction
 {
-
+    /**
+     * Generate data for redirect url request for placetopay
+     * 
+     * @param Illuminate\Http\Request $request
+     * @param App\Models\Order $order
+     * @return array
+     */
     public static function execute($request, Order $order): array
     {
         $auth = GenerateAuthPlacetopayAction::execute();
@@ -22,7 +28,7 @@ class CreateDataRedirectionAction
             'ipAddress' => $request->ip(),
             'userAgent' => $request->userAgent(),
         ];
-        ValidateDataRedirectAction::execute($data);
+        
         return $data;
     }
 }

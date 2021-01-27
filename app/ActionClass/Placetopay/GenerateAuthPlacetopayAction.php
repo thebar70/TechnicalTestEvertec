@@ -6,7 +6,11 @@ use Carbon\Carbon;
 
 class GenerateAuthPlacetopayAction
 {
-
+    /**
+     * Generate the authentication data for placetopay
+     * 
+     * @return array
+     */
     public static function execute(): array
     {
         date_default_timezone_set('America/Bogota');

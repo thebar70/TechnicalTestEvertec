@@ -4,10 +4,10 @@ namespace App\Providers;
 
 use App\Interfaces\Api\IPlacetopay as ApiIPlacetopay;
 use Illuminate\Support\ServiceProvider;
-
 use App\Interfaces\Web\IPlacetopay;
 use App\Interfaces\Web\IProduct;
 use App\Interfaces\Web\IOrder;
+
 use App\Services\Api\PlacetopayImpl as ApiPlacetopayImpl;
 use App\Services\Web\PlacetopayImpl;
 use App\Services\Web\ProductImpl;

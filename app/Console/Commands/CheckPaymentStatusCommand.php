@@ -22,7 +22,7 @@ class CheckPaymentStatusCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Check the payment status of the orders that have this pending process';
 
     /**
      * Create a new command instance.
@@ -45,10 +45,7 @@ class CheckPaymentStatusCommand extends Command
      */
     public function handle()
     {
-
-        Order::where('orders.status', Order::STATUS_CREATED)
-            ->join('payments', 'payments.order_id', 'orders.id')
-            ->where('payments.requestId', '!=', null)
+        Order::where('waiting_status_response', true)
             ->chunk(100, function ($orders) {
                 $orders->each(function ($order) {
                     $this->placetopay_manager->checkPaymentStatus($order);

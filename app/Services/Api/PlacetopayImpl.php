@@ -2,18 +2,21 @@
 
 namespace App\Services\Api;
 
-use App\ActionClass\Placetopay\CallPlacetopayAction;
 use App\ActionClass\Placetopay\GenerateAuthPlacetopayAction;
+use App\ActionClass\Placetopay\CallPlacetopayAction;
 use App\Exceptions\CheckPaymentStatusException;
 use App\Interfaces\Api\IPlacetopay;
-use App\Models\Order;
 use App\Models\Payment;
+use App\Models\Order;
+
 
 class PlacetopayImpl implements IPlacetopay
 {
+
     /**
-     * Returns a list of products
-     * @return Illuminate\Support\Collection
+     * Check the status of the payment with a call to placetopay
+     * 
+     * @param App\Models\Order $order
      */
     public function checkPaymentStatus(Order $order)
     {
@@ -26,30 +29,40 @@ class PlacetopayImpl implements IPlacetopay
             ];
             throw new CheckPaymentStatusException($reason, $data);
         }
-        
+
         if ($paymet_status_url) {
             $auth = GenerateAuthPlacetopayAction::execute();
             $data = ['auth' => $auth];
             $url = $paymet_status_url . $order->payment->requestId;
             $content = CallPlacetopayAction::execute($url, $data);
-            
+
+
             switch ($content->status->status) {
                 case 'REJECTED':
                     $order->status = Order::STATUS_REJECTED;
-                    $order->payment->status=Payment::PAYMENT_STATUS_REJECTED;
+                    $order->payment->status = Payment::PAYMENT_STATUS_REJECTED;
                     break;
                 case 'APPROVED':
                     $order->status = Order::STATUS_PAYED;
-                    $order->payment->status=Payment::PAYMENT_STATUS_APPROVED;
+                    $order->payment->status = Payment::PAYMENT_STATUS_APPROVED;
                     break;
                 case 'FAILED':
                     $order->status = Order::STATUS_REJECTED;
-                    $order->payment->status=Payment::PAYMENT_STATUS_FAILED;
+                    $order->payment->status = Payment::PAYMENT_STATUS_FAILED;
+                    break;
+                case 'PENDING':
+                    if ($content->status->reason == 'PT') {
+                        $order->payment->status = Payment::PAYMENT_STATUS_WAITING_RESPONSE;
+                    }
                     break;
                 default:
                     # code...
                     break;
             }
+
+            $order->waiting_status_response = false;
+
+            $order->payment->save();
             $order->save();
         }
     }

@@ -9,8 +9,10 @@ use App\Models\Product;
 
 class ProductImpl implements IProduct
 {
+    
     /**
      * Returns a list of products
+     * 
      * @return Illuminate\Support\Collection
      */
     public function listProducts(): Collection

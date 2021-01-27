@@ -21,6 +21,7 @@ class CreateOrdersTable extends Migration
             $table->string('customer_mobile');
             $table->float('total_amount');
             $table->string('status');
+            $table->boolean('waiting_status_response')->default(false);
             $table->unsignedBigInteger('product_id');
             $table->timestamps();
 

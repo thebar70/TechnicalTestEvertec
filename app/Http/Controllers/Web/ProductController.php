@@ -10,8 +10,19 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
+
+    /**
+     * Service handler for the product
+     * 
+     * @var App\Interfaces\Web\IProduct $product_manager
+     */
     protected $product_maganer;
 
+    /**
+     * Service controller for the product
+     * 
+     * @param App\Interfaces\Web\IOrder $product_manager
+     */
     public function __construct(IProduct $product_maganer)
     {
         $this->product_maganer = $product_maganer;

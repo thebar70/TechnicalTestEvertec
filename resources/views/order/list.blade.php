@@ -16,6 +16,7 @@
                                         <th>Telefono</th>
                                         <th>Total Pagado</th>
                                         <th>Estado</th>
+                                        <th style="width: 8%">Acciones</th>
                                     </tr>
                                 </thead>
 
@@ -27,7 +28,15 @@
                                             <td>{{ $order->customer_name }}</td>
                                             <td>{{ $order->customer_mobile }}</td>
                                             <td>{{ number_format($order->total_amount) }}</td>
-                                            <td>{{ $order->status }}</td>
+                                            <td>{{ $order->getCurrentStatus() }}</td>
+                                            <td>
+                                                <button type="button"
+                                                    onclick="location.href='{{ route('order.show', $order->id) }}';"
+                                                    data-toggle="tooltip" title="" class="btn btn-link  btn-primary"
+                                                    data-original-title="Ver">
+                                                    <i class="fa fa-info"></i>
+                                                </button>
+                                            </td>
                                         </tr>
                                     @endforeach
 
