@@ -1,4 +1,11 @@
-@switch($order->status)
+@if ($order->payment && $order->payment->status == \App\Models\Payment::PAYMENT_STATUS_WAITING_RESPONSE)
+    <h2><strong>Total Pagado: ${{number_format($order->product->price)  }}</strong> </h2><br>
+    <form action="{{ url('placetopay/redirect_user/' . $order->id) }}" method="POST">
+        {{ csrf_field() }}
+        <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Verificar</button>
+    </form>
+@else
+    @switch($order->status)
     @case(\App\Models\Order::STATUS_CREATED)
         <h2><strong>Total a Pagar: ${{number_format($order->product->price)  }}</strong> </h2><br>
         <form action="{{ url('placetopay/redirect_user/' . $order->id) }}" method="POST">
@@ -22,7 +29,8 @@
 
     @default
 
-@endswitch
+    @endswitch
+@endif
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">

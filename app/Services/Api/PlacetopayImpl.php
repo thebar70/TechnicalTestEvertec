@@ -35,7 +35,7 @@ class PlacetopayImpl implements IPlacetopay
             $data = ['auth' => $auth];
             $url = $paymet_status_url . $order->payment->requestId;
             $content = CallPlacetopayAction::execute($url, $data);
-
+            $order->waiting_status_response = false;
 
             switch ($content->status->status) {
                 case 'REJECTED':
@@ -51,6 +51,7 @@ class PlacetopayImpl implements IPlacetopay
                     $order->payment->status = Payment::PAYMENT_STATUS_FAILED;
                     break;
                 case 'PENDING':
+                    $order->waiting_status_response = true;
                     if ($content->status->reason == 'PT') {
                         $order->payment->status = Payment::PAYMENT_STATUS_WAITING_RESPONSE;
                     }
@@ -59,8 +60,6 @@ class PlacetopayImpl implements IPlacetopay
                     # code...
                     break;
             }
-
-            $order->waiting_status_response = false;
 
             $order->payment->save();
             $order->save();
